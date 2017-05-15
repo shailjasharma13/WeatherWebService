@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="weatherdata">
+<head>
+<title>UserLogin</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="weather.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+</head>
+
+<body>
+   
+	<div ng-controller="UserLogin">
+	
+<form class="form-horizontal" role="form">
+   
+<div class="form-group">
+<label for="userId" class="col-sm-2 control-label">Please Login</label><br><br>
+    <label for="userId" class="col-sm-2 control-label">UserId</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="user.userId" class="form-control" id="user.userId" placeholder="User Id"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="password" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+        <input type="password" ng-model="user.password" class="form-control" id="user.password" placeholder="Password" p/>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" class="btn btn-primary" value="Login" ng-click="userLogin()"/>
+    </div>
+</div>
+
+</form>
+
+</div>
+
+
+</body>
+</html>

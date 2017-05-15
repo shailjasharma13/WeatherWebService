@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="myCtrl" ng-init="onload()">
+		{{ firstName + " " + lastName }}
+		<p>{{userId}}</p>
+		<table>
+			<tr>
+				<td>Hello</td>
+				<td id="userId">test</td>
+			</tr>
+
+			<tr>
+				<td id="weatherdata">test</td>
+
+			</tr>
+			<tr>
+				<td>Delete User</td>
+				<td id="userId"><input type="button" value="Delete User "></input></td>
+
+			</tr>
+			<tr>
+				<td>Edit User</td>
+				<td id="userId"><input type="button" value="Edit User Details"></input></td>
+
+			</tr>
+			<tr>
+				<td>Plan Vacation</td>
+				<td id="userId"><input type="button" value="Plan vacation"></input></td>
+
+			</tr>
+		</table>
+
+	</div>
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller("myCtrl", function($scope) {
+			$scope.firstName = "John";
+			$scope.lastName = "Doe";
+		});
+		<!--app
+				.controller(
+						"myCtrl",
+						function($scope, $http, $window, $location) {
+							$scope.firstName = "John";
+							$scope.lastName = "Doe";
+
+							$http.get('http://localhost:8080/login').then(
+									function(response) {
+
+									});
+
+							$scope.onload = function() {
+								var url = window.location.href, params = url
+										.split('?')[1].split('&'), data = {}, tmp;
+								for (var i = 0, l = params.length; i < l; i++) {
+									tmp = params[i].split('=');
+									data[tmp[0]] = tmp[1];
+								}
+								$scope.userId = data.name;
+							}
+						});
+		-->
+		<!--window.onload = function() {
+			var url = document.location.href, params = url.split('?')[1]
+					.split('&'), data = {}, tmp;
+			for (var i = 0, l = params.length; i < l; i++) {
+				tmp = params[i].split('=');
+				data[tmp[0]] = tmp[1];
+			}
+			document.getElementById('userId').innerHTML = data.name;
+		}-->
+	</script>
+</body>
+</html>

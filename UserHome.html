@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UserHome</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="myCtrl" ng-init="onload()">
+
+		<h1>Welcome {{userId}}</h1>
+
+		<table border="3">
+
+			<tr>
+				<td>
+					<table>
+
+						<tr>
+							<td><h3>DETROIT</h3></td>
+
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>{{myWeather.weather[0].description}}</td>
+						</tr>
+
+						<tr>
+							<td>Temperature</td>
+							<td>{{myWeather.main.temp}}</td>
+						</tr>
+
+						<tr>
+							<td>Humidity</td>
+							<td>{{myWeather.main.humidity}}</td>
+						</tr>
+
+
+						<tr>
+							<td>Visibility</td>
+							<td>{{myWeather.visibility}}</td>
+						</tr>
+
+						<tr>
+							<td>Wind Speed</td>
+							<td>{{myWeather.wind.speed}}</td>
+						</tr>
+
+						<tr>
+							<td>Base</td>
+							<td>{{myWeather.base}}</td>
+						</tr>
+
+					</table>
+				</td>
+				<td>
+					<table>
+
+						<tr>
+							<td><h3>LONDON</h3></td>
+
+						</tr>
+
+						<tr>
+							<td>Description</td>
+							<td>{{myWeatherLondon.weather[0].description}}</td>
+						</tr>
+
+						<tr>
+							<td>Temperature</td>
+							<td>{{myWeatherLondon.main.temp}}</td>
+						</tr>
+
+						<tr>
+							<td>Humidity</td>
+							<td>{{myWeatherLondon.main.humidity}}</td>
+						</tr>
+
+
+						<tr>
+							<td>Visibility</td>
+							<td>{{myWeatherLondon.visibility}}</td>
+						</tr>
+
+						<tr>
+							<td>Wind Speed</td>
+							<td>{{myWeatherLondon.wind.speed}}</td>
+						</tr>
+
+						<tr>
+							<td>Base</td>
+							<td>{{myWeatherLondon.base}}</td>
+						</tr>
+
+					</table>
+				</td>
+
+				<td>
+					<table >
+
+						<tr>
+							<td><h3>DELHI</h3></td>
+
+						</tr>
+
+						<tr>
+							<td>Description</td>
+							<td>{{myWeatherDelhi.weather[0].description}}</td>
+						</tr>
+
+						<tr>
+							<td>Temperature</td>
+							<td>{{myWeatherDelhi.main.temp}}</td>
+						</tr>
+
+						<tr>
+							<td>Humidity</td>
+							<td>{{myWeatherDelhi.main.humidity}}</td>
+						</tr>
+
+
+						<tr>
+							<td>Visibility</td>
+							<td>{{myWeatherDelhi.visibility}}</td>
+						</tr>
+
+						<tr>
+							<td>Wind Speed</td>
+							<td>{{myWeatherDelhi.wind.speed}}</td>
+						</tr>
+
+						<tr>
+							<td>Base</td>
+							<td>{{myWeatherDelhi.base}}</td>
+						</tr>
+
+					</table>
+				</td>
+			<tr>
+		</table>
+		<br>
+		<br>
+		<button ng-click="getCities()">Get Cities < 100 miles</button>
+		<table border="3">
+		<tr ng-repeat="city in cities">
+				<td>{{city.city}}</td>
+		</tr>
+		</table>
+		<br>
+        <button ng-click="deleteUser()">Delete User</button>
+		<h4>{{msg}}</h4>
+		<br>
+		<button ng-click="updateUser()">Update User</button>
+
+
+	</div>
+
+	<script>
+		var app = angular.module("myApp", []);
+
+		app.controller("myCtrl", function($scope, $http, $location, $window) {
+
+			$scope.firstName = "John";
+			$scope.lastName = window.location.href;
+
+			$http.get("http://api.openweathermap.org/data/2.5/weather?q=Detroit&appid=29d14bfdfe923c4130e25e63c0f9600e").then(function(response) {
+				$scope.myWeather = response.data;
+			});
+			
+			$http.get("http://api.openweathermap.org/data/2.5/weather?q=London&appid=29d14bfdfe923c4130e25e63c0f9600e").then(function(response) {
+				$scope.myWeatherLondon = response.data;
+			});
+			
+			$http.get("http://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=29d14bfdfe923c4130e25e63c0f9600e").then(function(response) {
+				$scope.myWeatherDelhi = response.data;
+			});
+
+			$scope.onload = function() {
+				var url = window.location.href, params = url.split('?')[1]
+						.split('&'), data = {}, tmp;
+				for (var i = 0, l = params.length; i < l; i++) {
+					tmp = params[i].split('=');
+					data[tmp[0]] = tmp[1];
+				}
+				$scope.userId = data.name;
+			};
+			
+			
+			$scope.getCities = function() {
+				
+			$http.get('http://localhost:8080/cities').then(function(response) {
+		$scope.cities = response.data;
+	});
+					};
+			
+			
+
+			$scope.deleteUser = function() {
+				
+				var userId = $scope.userId
+             
+			$http.delete('http://localhost:8080/delete/' + userId)
+            .success(function () {
+              
+                $scope.msg="User Id deleted";
+                url = 'http://localhost:8080/user-add.html';
+					window.location.href = url;
+            })
+            .error(function (data, status, header, config) {
+                 $scope.msg="Error iN Page";
+            });
+			
+			
+			};
+			
+			
+			
+			$scope.updateUser = function() {
+				
+			var userId = $scope.userId
+            url = 'http://localhost:8080/UserUpdate.html?name='
+							+ encodeURIComponent(userId);
+					window.location.href = url
+					};
+					
+					
+
+		});
+	</script>
+
+</body>
+</html>

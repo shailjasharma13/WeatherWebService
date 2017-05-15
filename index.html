@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="weatherdata">
+<head>
+<title>AdminUser</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="weather.js"></script>
+</head>
+
+<body>
+
+	
+	<div ng-controller="GetAllUser">
+	
+	<h3>All Users</h3>
+
+		<table border="3">
+			<tr>
+				<td><h5>First Name</h5></td>
+				<td><h5>Last Name</h5></td>
+				<td><h5>UserId</h5></td>
+				
+			</tr>
+			<tr ng-repeat="user in users">
+				<td>{{user.firstName}}</td><td> {{user.lastName}}</td><td> {{user.userId}}</td>
+			</tr>
+		</table>
+		
+	</div>
+	
+	<div ng-controller="GetNumberOfUser">
+		<h3>Number Of User {{numberofUser.numberofuser}}</h3>
+	</div>
+</body>
+</html>

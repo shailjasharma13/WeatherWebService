@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="weatherdata">
+<head>
+<title>AddUser</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="weather.js"></script>
+</head>
+
+<body>
+	<div ng-controller="AddUser">
+<form class="form-horizontal" role="form" ng-submit="addUser()">
+    <div class="form-group">
+    <label for="firstName" class="col-sm-2 control-label">First Name</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="user.firstName" class="form-control" id="firstName" placeholder="First Name"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="lastName" class="col-sm-2 control-label">Last Name</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="user.lastName" class="form-control" id="lastName" placeholder="Last Name"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="userId" class="col-sm-2 control-label">UserId</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="user.userId" class="form-control" id="userId" placeholder="User Id"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="password" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="user.password" class="form-control" id="password" placeholder="Password"/>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" class="btn btn-primary" value="Save"/>
+    </div>
+</div>
+{{ResponseDetails}}
+</form>
+</div>
+<a href="Login.html">Click here to Login</a><br>
+<a href="AdminLogin.html">Click here to Admin Login</a>
+</body>
+</html>
